@@ -13,52 +13,103 @@
     <script src="../controller/indexCtrl.js" type="text/javascript"></script>
     <script src="../controller/shopCtrl.js" type="text/javascript"></script>
     <script src="../controller/caluCtrl.js" type="text/javascript"></script>
+    <script src="../controller/cartCtrl.js" type="text/javascript"></script>
+
     <title>AngularJS</title>
 </head>
+
 <body>
-<div ng-controller="indexCtrl">
-    <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">First Angular App</a>
-    </div>
-    <div >
-      <ul class="nav navbar-nav">
-        <li class="active" ng-repeat="item in items"><a href="#">{{item.title}}</a></li>
-        </ul>
-    </div>
-    </div>
+<!--Index Ctrl-->
+    <div ng-controller="indexCtrl">
+        <nav class="navbar navbar-default">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="#">First Angular App</a>
+              </div>
+            <div >
+              <ul class="nav navbar-nav">
+                <li class="active" ng-repeat="item in items"><a href="#">{{item.title}}</a></li>
+              </ul>
+            </div>
+        </nav>
         <div class="container">
-        <div class="jumbotron">
-        <b>{{message}}</b></br>
-        <input type="text" ng-model="name" placeholder="Enter Some Text Here:"></input>
-        {{Hello}} <label>{{name}}</label>
+            <div class="jumbotron">
+                <b>{{message}}</b></br>
+                <input type="text" ng-model="name" placeholder="Enter Some Text Here:"></input>
+                {{Hello}} <label>{{name}}</label></br>
+                <label>Click me!</label>
+                <button ng-click="changeColorRed()">Red</button>
+                <button ng-click="changeColorYellow()">Yellow</button>
+                <div ng-class="{error: isError, warning: isWarning}">{{changeMessageText}}</div> 
+            </div>                    
         </div>
-  </div>
-</nav>   
-</div>
+    </div>
+
+<!--Shop Ctrl-->   
 <div class="container jumbotron " ng-controller="shopCtrl">
     <label>{{message1}}</label></br>
-<div ng-repeat='item in items'>
+    <div ng-repeat='item in items'>
         <span>{{item.title}}</span>
         <input ng-model="item.quantity"></input>
         <span> {{item.price | currency}}</span>
         <span>{{item.price * item.quantity | currency}}</span>
         <button ng-click="remove($index)">Remove</button></br>        
     </div></br>
-    <input type="checkbox" ng-model="youCheckedIt"></input>
-    {{youCheckedIt}}
+    <input type="checkbox" ng-model="youCheckedIt"></input>    
+    {{youCheckedIt}}</br>        
 </div>
+
+<!--Cart Ctrl-->
+<div class="container jumbotron" ng-controller="cartCtrl">
+<span><b>{{message3}}</b></span>
+<table>
+    <tr>
+        <td>Name:</td>        
+        <td><input type="text" ng-model="cart.name" /></td>
+    </tr>
+        <tr>
+        <td>Price:</td>        
+        <td><input type="text" ng-model="cart.price" /></td>
+    </tr>
+        <tr>
+        <td>Quantity:</td>        
+        <td><input type="text" ng-model="cart.quantity" /></td>
+    </tr>
+    <tr>
+      <td colspan="2">  <button ng-click="addToCart(cart)">Add To Cart</button></td>
+    </tr>
+</table>
+
+<table border="1" class="table"><thead><tr>
+        <td>Name</td>
+        <td>Price</td>
+        <td>Quantity</td>
+        <td>Remove Item</td>
+    </tr></thead>
+    <tbody>
+        <tr ng-repeat="cart in carts">
+            <td>{{cart.name}}</td>
+            <td>{{cart.price}}</td>
+            <td>{{cart.quantity}}</td>
+            <td colspan="2">  <button ng-click="removeFromCart($index)">Remove From Cart</button></td>
+        </tr>      
+    </tbody>
+</table>
+</div>
+
+<!--Calu Ctrl-->
 <div class="container jumbotron ">
-<form ng-submit="requestFunding()" ng-controller="caluCtrl" >
-<b>{{message2}}</b></br>
-    Starting: <input ng-change="calNeeded()" ng-model="funding.startingEstimate"></input>
-    Recommendation: {{funding.needed}}</br>
+    <form ng-submit="requestFunding()" ng-controller="caluCtrl" >
+        <b>{{message2}}</b></br>
+        Starting: <input ng-change="calNeeded()" ng-model="funding.startingEstimate"></input>
+        Recommendation: {{funding.needed}}</br>
     </br>
     Starting: <input ng-change="computeNeeded()" ng-model="startingEstimate"></input>
     Recommendation: {{needed}}</br>
     <button>Fund My Startup</button>
-</form>
+    </form>
 </div>
+
 </body>
 </html>
+</script>
