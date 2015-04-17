@@ -11,4 +11,6 @@ app.controller('indexCtrl', function($scope){
 
     $scope.Hello = "Hello Mr.";
 
+    $scope.message = "Two Way Data Binding Example";
+
 });

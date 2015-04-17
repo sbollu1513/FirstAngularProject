@@ -12,6 +12,7 @@
 
     <script src="../controller/indexCtrl.js" type="text/javascript"></script>
     <script src="../controller/shopCtrl.js" type="text/javascript"></script>
+    <script src="../controller/caluCtrl.js" type="text/javascript"></script>
     <title>AngularJS</title>
 </head>
 <body>
@@ -29,6 +30,7 @@
     </div>
         <div class="container">
         <div class="jumbotron">
+        <b>{{message}}</b></br>
         <input type="text" ng-model="name" placeholder="Enter Some Text Here:"></input>
         {{Hello}} <label>{{name}}</label>
         </div>
@@ -36,16 +38,27 @@
 </nav>   
 </div>
 <div class="container jumbotron " ng-controller="shopCtrl">
-    <div ng-repeat='item in items'>
+    <label>{{message1}}</label></br>
+<div ng-repeat='item in items'>
         <span>{{item.title}}</span>
         <input ng-model="item.quantity"></input>
         <span> {{item.price | currency}}</span>
         <span>{{item.price * item.quantity | currency}}</span>
         <button ng-click="remove($index)">Remove</button></br>        
-    </div>
-    <label>{{message}}</label></br>
+    </div></br>
     <input type="checkbox" ng-model="youCheckedIt"></input>
     {{youCheckedIt}}
+</div>
+<div class="container jumbotron ">
+<form ng-submit="requestFunding()" ng-controller="caluCtrl" >
+<b>{{message2}}</b></br>
+    Starting: <input ng-change="calNeeded()" ng-model="funding.startingEstimate"></input>
+    Recommendation: {{funding.needed}}</br>
+    </br>
+    Starting: <input ng-change="computeNeeded()" ng-model="startingEstimate"></input>
+    Recommendation: {{needed}}</br>
+    <button>Fund My Startup</button>
+</form>
 </div>
 </body>
 </html>

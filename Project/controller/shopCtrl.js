@@ -1,4 +1,4 @@
-var messages = "You did awesome so far!";
+var messages = "ng-repeat & ng-click Examples";
 app.controller('shopCtrl', function($scope){
 	$scope.items = [
 		{title: 'Paint Pots', quantity: 8, price: 3.95},
@@ -10,7 +10,7 @@ app.controller('shopCtrl', function($scope){
 		$scope.items.splice(index, 1);
 	}
 
-	$scope.message = messages;
+	$scope.message1 = messages;
 
 	$scope.youCheckedIt = true;
 });
